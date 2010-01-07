@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "kvs"
+    gem.name = "ykk"
     gem.summary = %Q{Key Value Store.}
-    gem.description = %Q{KVS is a simple key value store.}
+    gem.description = %Q{YKK is a simple key value store.}
     gem.email = "jugyo.org@gmail.com"
-    gem.homepage = "http://github.com/jugyo/kvs"
+    gem.homepage = "http://github.com/jugyo/ykk"
     gem.authors = ["jugyo"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
   end
@@ -37,7 +37,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "kvs #{version}"
+  rdoc.title = "ykk #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

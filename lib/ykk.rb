@@ -2,7 +2,7 @@ require 'digest/sha1'
 require 'yaml'
 require 'fileutils'
 
-class KVS
+class YKK
   @instance = self.new
 
   def self.method_missing(method, *args, &block)
@@ -70,6 +70,6 @@ class KVS
     pairs = Dir.glob(dir + '/*').map {|f|
       "#{File.basename(f).inspect}: #{YAML.load_file(f).inspect}"
     }
-    "KVS(#{pairs.join ', '})"
+    "YKK(#{pairs.join ', '})"
   end
 end

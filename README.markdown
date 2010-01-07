@@ -1,38 +1,38 @@
-KVS
+YKK
 ========
 
-[http://github.com/jugyo/kvs](http://github.com/jugyo/kvs)
+[http://github.com/jugyo/ykk](http://github.com/jugyo/ykk)
 
 Description
 --------
 
-KVS is a simple key value store.
+YKK is a simple key value store.
 
 Install
 --------
 
-    gem install kvs
+    gem install ykk
 
 Usage
 --------
 
 use as singleton:
 
-    KVS.dir = '/tmp/kvs'
+    YKK.dir = '/tmp/ykk'
 
-    KVS['foo'] = 'bar'
-    puts KVS['foo'] #=> bar
+    YKK['foo'] = 'bar'
+    puts YKK['foo'] #=> bar
 
-    key = KVS << 'jugyo'
-    puts KVS[key] #=> jugyo
+    key = YKK << 'jugyo'
+    puts YKK[key] #=> jugyo
 
-    KVS.delete('foo')
+    YKK.delete('foo')
 
 use as instance:
 
-    KVS_A = KVS.new('/tmp/kvs_a')
-    KVS_A['foo'] = 'bar'
-    puts KVS_A['foo'] #=> bar
+    YKK_A = YKK.new('/tmp/ykk_a')
+    YKK_A['foo'] = 'bar'
+    puts YKK_A['foo'] #=> bar
 
 License
 --------
