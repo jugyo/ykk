@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "ykk"
-    gem.summary = %Q{Key Value Store.}
-    gem.description = %Q{YKK is a simple key value store.}
+    gem.summary = %Q{Simple key value store.}
+    gem.description = %Q{YKK is a simple key value store using YAML.}
     gem.email = "jugyo.org@gmail.com"
     gem.homepage = "http://github.com/jugyo/ykk"
     gem.authors = ["jugyo"]
