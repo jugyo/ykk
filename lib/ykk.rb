@@ -41,7 +41,8 @@ class YKK
 
   def []=(key, value)
     path = file_of(key)
-    FileUtils.mkdir_p(dir) unless File.exists?(dir)
+    dirname = File.dirname(path)
+    FileUtils.mkdir_p(dirname) unless File.exists?(dirname)
     File.open(path, 'wb') { |f| f << value.to_yaml }
   end
 
@@ -53,17 +54,13 @@ class YKK
 
   def file_of(key)
     key = key.to_s
-    raise ArgumentError, 'invalid key' unless key =~ /^[\w]+$/
+    raise ArgumentError, 'invalid key' unless key =~ /^[\w\/]+$/
     raise "dir is not specified" unless dir
     File.join(dir, key)
   end
 
   def key_gen(value)
     Digest::SHA1.hexdigest(value.to_yaml)
-  end
-
-  def keys
-    Dir.glob(dir + '/*').map {|f| File.basename(f) }
   end
 
   def inspect

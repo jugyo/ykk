@@ -12,15 +12,16 @@ describe YKK do
 
   it 'generates file path' do
     YKK.file_of('foo').should == @tmpdir + '/foo'
+    YKK.file_of('foo/bar').should == @tmpdir + '/foo/bar'
   end
 
   it 'stores data' do
     YKK['foo'] = {:a => 'b', :c => 'd'}
     YKK['foo'].should == {:a => 'b', :c => 'd'}
     File.exists?(YKK.file_of('foo')).should be_true
-    YKK['bar'] = 'bar'
-    YKK.keys.include?('foo').should be_true
-    YKK.keys.include?('bar').should be_true
+    YKK['a/b'] = {:e => 'f', :g => 'h'}
+    YKK['a/b'].should == {:e => 'f', :g => 'h'}
+    File.exists?(YKK.file_of('a/b')).should be_true
   end
 
   it 'should store data with "<<"' do
@@ -70,7 +71,6 @@ describe YKK do
     it 'raises ArgumentError' do
       lambda { YKK['.'] }.should raise_error(ArgumentError)
       lambda { YKK['../'] }.should raise_error(ArgumentError)
-      lambda { YKK['/'] }.should raise_error(ArgumentError)
     end
   end
 
