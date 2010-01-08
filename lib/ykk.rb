@@ -59,7 +59,7 @@ class YKK
   end
 
   def key_gen(value)
-    Digest::SHA1.hexdigest(value.to_s)
+    Digest::SHA1.hexdigest(value.to_yaml)
   end
 
   def keys
