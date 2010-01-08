@@ -34,6 +34,10 @@ use as instance:
     YKK_A['foo'] = 'bar'
     puts YKK_A['foo'] #=> bar
 
+sub directory:
+
+    YKK['bar/xxx'] = 'xxx' # store to bar/xxx
+
 License
 --------
 
