@@ -59,7 +59,7 @@ class YKK
   end
 
   def partition(key)
-    return [key] unless self.partition_size > 0
+    return [key] if /\// =~ key || self.partition_size <= 0
     key.scan(/.{1,#{partition_size}}/)
   end
 

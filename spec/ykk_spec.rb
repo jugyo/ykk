@@ -19,6 +19,8 @@ describe YKK do
     it 'generates file path' do
       YKK.file_of('foo').should == @tmpdir + '/fo/o'
       YKK.file_of('fooooo').should == @tmpdir + '/fo/oo/oo'
+      YKK.file_of('/fooooo').should == @tmpdir + '/fooooo' # 先頭に / を付けると fooooo というキーを使いつつディレクトリを分割しないという裏技が可能に！
+      YKK.file_of('foo/bar').should == @tmpdir + '/foo/bar' # / を使うと任意の箇所でディレクトリ階層を分けることが可能に！
     end
   end
 
@@ -34,6 +36,13 @@ describe YKK do
     YKK['a/b'] = {:e => 'f', :g => 'h'}
     YKK['a/b'].should == {:e => 'f', :g => 'h'}
     File.exists?(YKK.file_of('a/b')).should be_true
+  end
+
+  it 'should raise error when bump　filename and dirname' do
+    YKK['foo'] = 'foo'
+    lambda {
+      YKK['foo/bar'] = 'foo bar'
+    }.should raise_error(Errno::ENOTDIR)
   end
 
   it 'should store data with "<<"' do
