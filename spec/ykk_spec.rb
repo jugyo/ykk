@@ -8,6 +8,18 @@ describe YKK do
     @tmpdir = Dir.tmpdir + '/ykk_test'
     FileUtils.rm_rf(@tmpdir)
     YKK.dir = @tmpdir
+    YKK.partition_size = 0
+  end
+
+  describe 'enable_partition = false' do
+    before do
+      YKK.partition_size = 2
+    end
+
+    it 'generates file path' do
+      YKK.file_of('foo').should == @tmpdir + '/fo/o'
+      YKK.file_of('fooooo').should == @tmpdir + '/fo/oo/oo'
+    end
   end
 
   it 'generates file path' do
@@ -89,7 +101,7 @@ describe YKK do
     before do
       @tmpdir_for_foo = Dir.tmpdir + '/ykk_test_foo'
       FileUtils.rm_rf(@tmpdir_for_foo)
-      @ykk = YKK.new(@tmpdir_for_foo)
+      @ykk = YKK.new(:dir => @tmpdir_for_foo)
     end
 
     it 'generates file path' do

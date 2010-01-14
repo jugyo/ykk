@@ -3,8 +3,6 @@ require 'yaml'
 require 'fileutils'
 
 class YKK
-  @instance = self.new
-
   def self.method_missing(method, *args, &block)
     if @instance.respond_to?(method)
       @instance.__send__(method, *args, &block)
@@ -17,10 +15,11 @@ class YKK
     @instance.inspect
   end
 
-  attr_accessor :dir
+  attr_accessor :dir, :partition_size
 
-  def initialize(dir = nil)
-    self.dir = dir
+  def initialize(options = {})
+    self.dir = options[:dir]
+    self.partition_size = options[:partition_size] || 0
   end
 
   def <<(value)
@@ -56,7 +55,12 @@ class YKK
     key = key.to_s
     raise ArgumentError, 'invalid key' unless key =~ /^[\w\/]+$/
     raise "dir is not specified" unless dir
-    File.join(dir, key)
+    File.join(dir, *partition(key))
+  end
+
+  def partition(key)
+    return [key] unless self.partition_size > 0
+    key.scan(/.{1,#{partition_size}}/)
   end
 
   def key_gen(value)
@@ -69,4 +73,6 @@ class YKK
     }
     "YKK(#{pairs.join ', '})"
   end
+
+  @instance = self.new
 end
